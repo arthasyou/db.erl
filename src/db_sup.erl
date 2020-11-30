@@ -17,7 +17,7 @@ start_link() ->
     supervisor:start_link({local, ?SERVER}, ?MODULE, []).
 
 init([]) ->
-    {ok, Pools} = application:get_env(db, pools),
+    {ok, Pools} = application:get_env(erl_db, pools),
     PoolSpecs = lists:map(fun({Name, PoolArgs, WorkerArgs}) ->
         poolboy:child_spec(Name, PoolArgs, WorkerArgs)
     end, Pools),
